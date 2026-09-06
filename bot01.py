@@ -7,7 +7,7 @@ from PIL import Image
 
 def sisip(email, char):
     pos = email.find('@')
-    emailBaru = email[0:pos] + char + email[pos:-1]
+    emailBaru = email[0:pos] + char + email[pos:]
     return emailBaru
 
 def getHP():
