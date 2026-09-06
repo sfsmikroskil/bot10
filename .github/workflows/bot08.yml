@@ -43,7 +43,7 @@ jobs:
           playwright install chromium --with-deps
 
       - name: Jalankan Bot Python
-        run: python bot01.py
+        run: python bot08.py
 # LANGKAH UNTUK MENYIMPAN PREVIEW SCREENSHOT
       - name: Simpan Preview Screenshot
         if: always() # Tetap simpan foto meskipun skrip error di tengah jalan
