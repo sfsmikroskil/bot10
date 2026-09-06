@@ -1,0 +1,108 @@
+import asyncio
+from playwright.async_api import async_playwright
+import pytesseract
+import random as r
+from data2 import contacts
+from PIL import Image
+
+def sisip(email, char):
+    pos = email.find('@')
+    emailBaru = email[0:pos] + char + email[pos:]
+    return emailBaru
+
+def getHP():
+    hpAwalan = ["0852", "0822", "0853", "0857", "0813", "0822", "0823"]
+    n1 = r.randint(1, 9999)
+    n1 = f"{n1:04d}"
+    n2 = r.randint(1, 9999)
+    n2 = f"{n2:04d}"
+    noHP = hpAwalan[r.randint(0,6)] + n1 + n2
+    return noHP
+
+async def main(nama, email, c):
+    async with async_playwright() as p:
+        noHP = getHP()
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page(viewport={'width': 720, 'height': 1280})
+        try:
+            # 1. Buka halaman website
+            #print("Membuka halaman website...")
+            await page.goto("https://virtual-expo.lkpp.go.id/visitor/register")
+            await page.wait_for_timeout(1000)
+            # 2. Klik cookies
+            await page.mouse.click(620, 1236)
+            # 3. Isi data akun
+            await page.fill("#profile_name", nama)
+            await page.fill("#profile_email", email)
+            await page.fill("#profile_company_name", "Kementerian Imigrasi dan Pemasyarakatan")
+            await page.fill("#profile_occupation", "Ditjen Imigrasi dan Pemasyarakatan")
+            await page.fill("#profile_phone_number", noHP)
+            await page.fill("#profile_password", "Admin123")
+            await page.fill("#profile_password_confirmation", "Admin123")
+            await page.check("input.form-check-input")
+
+            await page.wait_for_timeout(500)
+            if(c==0):
+                await page.screenshot(path=f"{c}_0reg.png")
+            # 3. Regis
+            await page.click("button[type='submit']")
+            await page.wait_for_timeout(5000)
+            #await page.screenshot(path=f"{c}_1login.png")
+            #await page.wait_for_timeout(2000)
+            # 4. Tombol lewati
+            await page.mouse.click(352, 1007)
+            await page.wait_for_timeout(5000)
+            #await page.screenshot(path=f"{c}_2lewati.png")
+
+            #Close banner
+            #await page.wait_for_timeout(3000)
+            #Tombol close banner
+            await page.mouse.click(592, 531)
+            #await page.wait_for_timeout(2000)
+            #await page.screenshot(path=f"{c}_3banner.png")
+
+            # 6. Masukk Hall
+            await page.wait_for_timeout(3000)
+            # klik hall
+            await page.mouse.click(277, 654)
+            await page.wait_for_timeout(3000)
+            #await page.screenshot(path=f"{c}_4hall.png")
+            # 7. Filter booth
+            await page.mouse.click(420, 30)
+            await page.wait_for_timeout(1000)
+            #await page.screenshot(path=f"{c}_5filter.png")
+            await page.keyboard.type("imigra")
+            await page.wait_for_timeout(1000)
+            #await page.screenshot(path=f"{c}_6booth.png")
+            await page.keyboard.press("Enter")
+            # Sudah masuk boot
+
+            await page.wait_for_timeout(3000)
+            await page.mouse.click(470, 830) #info
+            #await page.mouse.click(357, 624) #video
+            #await page.mouse.click(170, 662) #poster kiri
+            #await page.mouse.click(540, 662) #poster kanan
+            await page.wait_for_timeout(1000)
+            if(c==0 or True):            
+                await page.screenshot(path=f"{c}_9last.png")
+
+            print(f"Akun : ({c}) {nama} | Selesai")
+            await page.wait_for_timeout(1000)
+        except:
+            print(f"Terjadi Error : {c} {nama} {email}")
+        await browser.close()
+
+if __name__ == "__main__":
+    jumlah = 10
+    mulaiDari = 0
+    print("Mulai...")
+    for i in range (mulaiDari, mulaiDari+jumlah):
+        contact = contacts[i]
+        nama = contact["nama"]
+        #nama = nama[3:-3]
+        email = contact["email"]
+        email = sisip(email, "2")
+        c = i
+        #print(f"Proses: {nama} ({email})")
+        asyncio.run(main(nama, email, c))
+    print("Selesai")
