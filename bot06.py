@@ -94,7 +94,7 @@ async def main(nama, email, c):
             #await page.mouse.click(170, 662) #poster kiri
             #await page.mouse.click(540, 662) #poster kanan
             await page.wait_for_timeout(1000)
-            if(c<=10 or 499):            
+            if(c<=10 or 199):            
                 await page.screenshot(path=f"{c}_9last.png")
 
             print(f"Akun : ({c}) {nama} | Selesai")
