@@ -34,51 +34,61 @@ async def main(nama, email, c):
             await page.fill("#profile_name", nama)
             await page.fill("#profile_email", email)
             await page.fill("#profile_company_name", "Kementerian Imigrasi dan Pemasyarakatan")
-            await page.fill("#profile_occupation", "Ditjen Imigrasi dan Pemasyarakatan")
+            await page.fill("#profile_occupation", "Masyarakat")
             await page.fill("#profile_phone_number", noHP)
             await page.fill("#profile_password", "Admin123")
             await page.fill("#profile_password_confirmation", "Admin123")
             await page.check("input.form-check-input")
 
-            await page.wait_for_timeout(500)
-            if(c==0):
+            await page.wait_for_timeout(1500)
+            
+            if(c<=10):
                 await page.screenshot(path=f"{c}_0reg.png")
-            # 3. Regis
+
+            page.wait_for_timeout(2000)
+# 2. Klik cookies
+            await page.mouse.click(620, 1236)
+#Regis
             await page.click("button[type='submit']")
-            await page.wait_for_timeout(5000)
-            #await page.screenshot(path=f"{c}_1login.png")
-            #await page.wait_for_timeout(2000)
+            await page.wait_for_timeout(10000)
+            await page.screenshot(path=f"{c}_1login.png")
+
             # 4. Tombol lewati
             await page.mouse.click(352, 1007)
-            await page.wait_for_timeout(5000)
-            #await page.screenshot(path=f"{c}_2lewati.png")
+            await page.wait_for_timeout(100)
+            await page.mouse.click(352, 1007)
+            await page.wait_for_timeout(7000) #memuat hall dengan banner
+            await page.screenshot(path=f"{c}_2lewati.png")
 
             #Close banner
-            #await page.wait_for_timeout(3000)
+            #await page.wait_for_timeout(5000)
             #Tombol close banner
             await page.mouse.click(592, 531)
-             # 2. Klik cookies
-            await page.mouse.click(620, 1236)
+        
+            await page.wait_for_timeout(1000)
+            
             #await page.wait_for_timeout(2000)
-            #await page.screenshot(path=f"{c}_3banner.png")
+            await page.screenshot(path=f"{c}_3banner.png")
 
+            
             # 6. Masukk Hall
-            await page.wait_for_timeout(5000)
+            await page.wait_for_timeout(1000)
             # klik hall
             await page.mouse.click(277, 654)
-            await page.wait_for_timeout(3000)
-            #await page.screenshot(path=f"{c}_4hall.png")
+            await page.wait_for_timeout(5000)
+            await page.screenshot(path=f"{c}_4hall.png")
             # 7. Filter booth
             await page.mouse.click(420, 30)
-            await page.wait_for_timeout(1000)
-            #await page.screenshot(path=f"{c}_5filter.png")
+            await page.wait_for_timeout(2000)
+            await page.screenshot(path=f"{c}_5filter.png") #setelah klik dropdown
             await page.keyboard.type("imigra")
             await page.wait_for_timeout(1000)
-            #await page.screenshot(path=f"{c}_6booth.png")
+            await page.screenshot(path=f"{c}_6booth.png")
             await page.keyboard.press("Enter")
             # Sudah masuk boot
 
             await page.wait_for_timeout(3000)
+            await page.screenshot(path=f"{c}_7booth_imigrasi.png") #berhasil filter
             await page.mouse.click(470, 830) #info
             #await page.mouse.click(357, 624) #video
             #await page.mouse.click(170, 662) #poster kiri
@@ -89,20 +99,20 @@ async def main(nama, email, c):
 
             print(f"Akun : ({c}) {nama} | Selesai")
             await page.wait_for_timeout(1000)
-        except:
-            print(f"Terjadi Error : {c} {nama} {email}")
+        except Exception as e:
+            print(f"Terjadi Error : {c} {nama} {email}\n{e}")
         await browser.close()
 
 if __name__ == "__main__":
-    jumlah = 500
-    mulaiDari = 0
+    jumlah = 100
+    mulaiDari = 1000
     print("Mulai...")
     for i in range (mulaiDari, mulaiDari+jumlah):
         contact = contacts[i]
         nama = contact["nama"]
         #nama = nama[3:-3]
         email = contact["email"]
-        #email = sisip(email, "1")
+        #email = sisip(email, "_d")
         c = i
         #print(f"Proses: {nama} ({email})")
         asyncio.run(main(nama, email, c))
