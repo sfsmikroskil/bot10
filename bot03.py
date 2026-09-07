@@ -22,7 +22,7 @@ def getHP():
 async def main(nama, email, c):
     async with async_playwright() as p:
         noHP = getHP()
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=True ,args=["--disable-dev-shm-usage", "--no-sandbox"])
         page = await browser.new_page(viewport={'width': 720, 'height': 1280})
         try:
             # 1. Buka halaman website
@@ -94,7 +94,7 @@ async def main(nama, email, c):
 
 if __name__ == "__main__":
     jumlah = 500
-    mulaiDari = 0
+    mulaiDari = 500
     print("Mulai...")
     for i in range (mulaiDari, mulaiDari+jumlah):
         contact = contacts[i]
