@@ -12,7 +12,7 @@ def sisip(email, char):
 
 def getHP():
     hpAwalan = ["0852", "0822", "0853", "0857", "0813", "0822", "0823"]
-    n1 = r.randint(1, 999)
+    n1 = r.randint(1, 9999)
     n1 = f"{n1:04d}"
     n2 = r.randint(1, 9999)
     n2 = f"{n2:04d}"
@@ -94,7 +94,7 @@ async def main(nama, email, c):
             #await page.mouse.click(170, 662) #poster kiri
             #await page.mouse.click(540, 662) #poster kanan
             await page.wait_for_timeout(1000)
-            if(c<=10 or c == 999):            
+            if(c<=10 or 499):            
                 await page.screenshot(path=f"{c}_9last.png")
 
             print(f"Akun : ({c}) {nama} | Selesai")
