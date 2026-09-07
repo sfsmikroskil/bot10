@@ -29,8 +29,7 @@ async def main(nama, email, c):
             #print("Membuka halaman website...")
             await page.goto("https://virtual-expo.lkpp.go.id/visitor/register")
             await page.wait_for_timeout(1000)
-            # 2. Klik cookies
-            await page.mouse.click(620, 1236)
+           
             # 3. Isi data akun
             await page.fill("#profile_name", nama)
             await page.fill("#profile_email", email)
@@ -58,11 +57,13 @@ async def main(nama, email, c):
             #await page.wait_for_timeout(3000)
             #Tombol close banner
             await page.mouse.click(592, 531)
+             # 2. Klik cookies
+            await page.mouse.click(620, 1236)
             #await page.wait_for_timeout(2000)
             #await page.screenshot(path=f"{c}_3banner.png")
 
             # 6. Masukk Hall
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(5000)
             # klik hall
             await page.mouse.click(277, 654)
             await page.wait_for_timeout(3000)
@@ -83,7 +84,7 @@ async def main(nama, email, c):
             #await page.mouse.click(170, 662) #poster kiri
             #await page.mouse.click(540, 662) #poster kanan
             await page.wait_for_timeout(1000)
-            if(c==0 or True):            
+            if(c<=10):            
                 await page.screenshot(path=f"{c}_9last.png")
 
             print(f"Akun : ({c}) {nama} | Selesai")
@@ -94,14 +95,14 @@ async def main(nama, email, c):
 
 if __name__ == "__main__":
     jumlah = 500
-    mulaiDari = 500
+    mulaiDari = 0
     print("Mulai...")
     for i in range (mulaiDari, mulaiDari+jumlah):
         contact = contacts[i]
         nama = contact["nama"]
         #nama = nama[3:-3]
         email = contact["email"]
-        email = sisip(email, "6")
+        #email = sisip(email, "1")
         c = i
         #print(f"Proses: {nama} ({email})")
         asyncio.run(main(nama, email, c))
