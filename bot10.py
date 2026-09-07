@@ -94,7 +94,7 @@ async def main(nama, email, c):
             #await page.mouse.click(170, 662) #poster kiri
             #await page.mouse.click(540, 662) #poster kanan
             await page.wait_for_timeout(1000)
-            if(c<=10 or 499):            
+            if(c<=10 or 199):            
                 await page.screenshot(path=f"{c}_9last.png")
 
             print(f"Akun : ({c}) {nama} | Selesai")
@@ -104,8 +104,8 @@ async def main(nama, email, c):
         await browser.close()
 
 if __name__ == "__main__":
-    jumlah = 500
-    mulaiDari = 0
+    jumlah = 200
+    mulaiDari = 300
     print("Mulai...")
     for i in range (mulaiDari, mulaiDari+jumlah):
         contact = contacts[i]
@@ -113,7 +113,7 @@ if __name__ == "__main__":
         #nama = nama[3:-3]
         email = contact["email"]
         email = sisip(email, ".1")
-        c = i
+        c = i-mulaiDari
         #print(f"Proses: {nama} ({email})")
         asyncio.run(main(nama, email, c))
     print("Selesai")
