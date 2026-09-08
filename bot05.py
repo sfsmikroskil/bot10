@@ -42,7 +42,7 @@ async def main(nama, email, c):
 
             await page.wait_for_timeout(1500)
             
-            if(c<=10):
+            if(c<=1):
                 await page.screenshot(path=f"{c}_0reg.png")
 
             page.wait_for_timeout(2000)
@@ -94,7 +94,7 @@ async def main(nama, email, c):
             #await page.mouse.click(170, 662) #poster kiri
             #await page.mouse.click(540, 662) #poster kanan
             await page.wait_for_timeout(1000)
-            if(c<=5 or c==199 or c==399):            
+            if(c<=5 or c==199 or c==299):            
                 await page.screenshot(path=f"{c}_9last.png")
 
             print(f"Akun : ({c}) {nama} | Selesai")
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         nama = contact["nama"]
         #nama = nama[3:-3]
         email = contact["email"]
-        email = sisip(email, "80")
+        email = sisip(email, "065")
         c = i-mulaiDari
         #print(f"Proses: {nama} ({email})")
         asyncio.run(main(nama, email, c))
