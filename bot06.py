@@ -42,8 +42,8 @@ async def main(nama, email, c):
 
             await page.wait_for_timeout(1500)
             
-            if(c<=1):
-                await page.screenshot(path=f"{c}_0reg.png")
+            #if(c<=1):
+                #await page.screenshot(path=f"{c}_0reg.png")
 
             page.wait_for_timeout(2000)
 # 2. Klik cookies
@@ -51,7 +51,8 @@ async def main(nama, email, c):
 #Regis
             await page.click("button[type='submit']")
             await page.wait_for_timeout(10000)
-            #await page.screenshot(path=f"{c}_1login.png")
+            id(c<=1):
+                await page.screenshot(path=f"{c}_1login.png")
 
             # 4. Tombol lewati
             await page.mouse.click(352, 1007)
