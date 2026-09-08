@@ -51,7 +51,7 @@ async def main(nama, email, c):
 #Regis
             await page.click("button[type='submit']")
             await page.wait_for_timeout(10000)
-            id(c<=1):
+            if(c<=1):
                 await page.screenshot(path=f"{c}_1login.png")
 
             # 4. Tombol lewati
