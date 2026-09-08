@@ -2,7 +2,7 @@ import asyncio
 from playwright.async_api import async_playwright
 import pytesseract
 import random as r
-from data1 import contacts
+from data5 import contacts
 from PIL import Image
 
 def sisip(email, char):
@@ -72,7 +72,7 @@ async def main(nama, email, c):
 
             
             # 6. Masukk Hall
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(8000)
             # klik hall
             await page.mouse.click(277, 654)
             await page.wait_for_timeout(5000)
@@ -104,15 +104,15 @@ async def main(nama, email, c):
         await browser.close()
 
 if __name__ == "__main__":
-    jumlah = 400
-    mulaiDari = 400
+    jumlah = 300
+    mulaiDari = 0
     print("Mulai...")
     for i in range (mulaiDari, mulaiDari+jumlah):
         contact = contacts[i]
         nama = contact["nama"]
         #nama = nama[3:-3]
         email = contact["email"]
-        email = sisip(email, "91")
+        email = sisip(email, "80")
         c = i-mulaiDari
         #print(f"Proses: {nama} ({email})")
         asyncio.run(main(nama, email, c))
