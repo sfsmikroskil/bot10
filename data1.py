@@ -1,4 +1,4 @@
-contacts = 
+contacts = [
     {"nama": "A.A.GEDE RAKA ARTA YOGA", "email": "a.a.gede.raka.arta.yoga00@kemenimipas.go.id"},
     {"nama": "A.A. ISTRI AGUNG MIANGGI VANYANTARI", "email": "a.a.istri.agung.mianggi.vanyantari01@kemenimipas.go.id"},
     {"nama": "A.A. KETUT DARMA PUTRA", "email": "a.a.ketut.darma.putra01@kemenimipas.go.id"},
