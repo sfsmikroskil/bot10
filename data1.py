@@ -1,6 +1,4 @@
-contacts = [
-    {"nama": "A.A.GD.BAGUS ADITYA PUTRA NUGRAHA, S.Tr.Im.", "email": "a.a.gd.bagus.aditya.putra.nugraha00@kemenimipas.go.id"},
-    {"nama": "A A GD DINA ANGGADANA KARUNIA", "email": "a.a.gd.dina.anggadana.karunia84@kemenimipas.go.id"},
+contacts = 
     {"nama": "A.A.GEDE RAKA ARTA YOGA", "email": "a.a.gede.raka.arta.yoga00@kemenimipas.go.id"},
     {"nama": "A.A. ISTRI AGUNG MIANGGI VANYANTARI", "email": "a.a.istri.agung.mianggi.vanyantari01@kemenimipas.go.id"},
     {"nama": "A.A. KETUT DARMA PUTRA", "email": "a.a.ketut.darma.putra01@kemenimipas.go.id"},
